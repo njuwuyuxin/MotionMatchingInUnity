@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,17 +19,32 @@ public class BVHAnimationImporterEditor : Editor
 
         if (GUILayout.Button("Import animation"))
         {
-            parseFile();
+            parseFile(bvhImporter.filename);
+        }
+        
+        if (GUILayout.Button("Import animation in directory"))
+        {
+            string[] files = Directory.GetFiles(bvhImporter.directory);
+            foreach (var file in files)
+            {
+                if (file.EndsWith(".bvh"))
+                {
+                    parseFile(file);
+                }
+            }
         }
     }
 
-    public void parseFile() {
+    public void parseFile(string fileName) {
         bvhAnimationClip = ScriptableObject.CreateInstance<BVHAnimationClip>();
         bvhAnimationClip.boneList = new List<string>();
         bvhAnimationClip.boneRotations = new List<RotationCurve>();
-        AssetDatabase.CreateAsset(bvhAnimationClip,bvhImporter.filename.Replace(".bvh",".asset"));
+
+        string shortFileName = fileName.Split("/").Last().Split("\\").Last().Replace(".bvh", ".asset");
+        string fullFileName = bvhImporter.outputDirectory + "/" + shortFileName;
+        AssetDatabase.CreateAsset(bvhAnimationClip, fullFileName);
         
-        parse(File.ReadAllText(bvhImporter.filename));
+        parse(File.ReadAllText(fileName));
         
         EditorUtility.SetDirty(bvhAnimationClip);
         AssetDatabase.SaveAssets();

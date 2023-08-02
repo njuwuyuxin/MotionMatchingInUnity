@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c39f982e2e276d4a8484c68fa23ca57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 11400000, guid: 618b6096aec88fd4a99f495bfefbdbf8, type: 2}
+  animationClip: {fileID: 11400000, guid: 18a2530eadbf9824e9d922fbb97017f1, type: 2}
 --- !u!114 &130935725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b1b34a193948f4bb5756ff609fa771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  filename: Assets/lafan1/walk1_subject1.bvh
+  filename: Assets/lafan1/walk1_subject2.bvh
+  directory: Assets/lafan1
+  outputDirectory: Assets/BVHAnimation
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
