@@ -4,6 +4,8 @@ using UnityEngine;
 public class BVHAnimator : MonoBehaviour
 {
     public BVHAnimationClip animationClip;
+    
+    public int currentFrameDisplay;
 
     private Transform[] m_BoneList;
     private int m_CurrentFrame;
@@ -48,12 +50,15 @@ public class BVHAnimator : MonoBehaviour
         {
             SampleAnimation();
             m_CurrentFrame++;
+            currentFrameDisplay = m_CurrentFrame;
             m_Timer -= (1f / 30f);
         }
         m_Timer += Time.deltaTime;
 
         m_TimerBeforeLastSample += Time.deltaTime;
         TickPose();
+
+        // Debug.DrawLine(rootBone.transform.position, rootBone.transform.position + rootBone.forward, Color.green);
     }
 
     private void SampleAnimation()
